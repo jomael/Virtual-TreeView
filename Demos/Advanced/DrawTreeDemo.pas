@@ -493,7 +493,7 @@ begin
     case Column of
       0:
         begin
-          if Node.Parent = Sender.RootNode then
+          if Sender.NodeParent[Node] = nil then
             NodeWidth := Canvas.TextWidth(Data.FullPath) + 2 * AMargin
           else
             NodeWidth := Canvas.TextWidth(ExtractFileName(Data.FullPath)) + 2 * AMargin;
@@ -604,7 +604,7 @@ var
   
 begin
   Data := Sender.GetNodeData(Node);
-  if Assigned(Data) and Assigned(Data.Image) and (Column = 1) then
+  if Assigned(Data) and Assigned(Data.Image) then
     R := Rect(0, 0, 2 * Data.Image.Width, 2 * Data.Image.Height)
   else
     R := Rect(0, 0, 0, 0);
@@ -622,7 +622,7 @@ var
 
 begin
   Data := Sender.GetNodeData(Node);
-  if Assigned(Data) and Assigned(Data.Image) and (Column = 1) then
+  if Assigned(Data) and Assigned(Data.Image) then
   begin
     SetStretchBltMode(Canvas.Handle, HALFTONE);
     StretchBlt(Canvas.Handle, 0, 0, 2 * Data.Image.Width, 2 * Data.Image.Height, Data.Image.Canvas.Handle, 0, 0,
